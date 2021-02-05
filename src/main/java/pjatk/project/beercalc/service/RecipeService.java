@@ -5,6 +5,7 @@ import pjatk.project.beercalc.model.Recipe;
 import pjatk.project.beercalc.repository.RecipeRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RecipeService {
@@ -15,4 +16,13 @@ public class RecipeService {
     }
 
     public List<Recipe> findAll() { return recipeRepository.findAll(); }
+
+
+    public Recipe saveRecipe(Recipe recipe) {
+        return recipeRepository.save(recipe);
+    }
+
+    public Optional<Recipe> findById(Long id) {
+        return recipeRepository.findById(id);
+    }
 }

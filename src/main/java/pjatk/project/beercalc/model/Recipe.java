@@ -3,34 +3,52 @@ package pjatk.project.beercalc.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.List;
 
 @Entity
 public class Recipe {
 
     @Id
     @GeneratedValue
+    private Long id;
     private String name;
     private double extract;
     private int IBU;
-    private int id;
-//    private List<Malt> malts;
-//    private List<Hop> hops;
+    private double maltAmount;
+    private double targetVolume;
+    private double hopAmount;
+    private double hopAlfaAcids;
+    private double color;
 
-    public Recipe(String name, double extract, int IBU, int id) {
+    public Recipe(String name, double extract, int IBU, double maltAmount, double targetVolume, double hopAmount, double hopAlfaAcids, double color) {
         this.name = name;
         this.extract = extract;
         this.IBU = IBU;
-        this.id = id;
+        this.maltAmount = maltAmount;
+        this.targetVolume = targetVolume;
+        this.hopAmount = hopAmount;
+        this.hopAlfaAcids = hopAlfaAcids;
+        this.color = color;
     }
 
     public Recipe() {
     }
 
-    public Recipe(String name, double extract, int IBU) {
+    public Recipe(Long id, String name, double extract, int IBU, double maltAmount, double targetVolume, double hopAmount, double color) {
+        this.id = id;
         this.name = name;
         this.extract = extract;
         this.IBU = IBU;
+        this.maltAmount = maltAmount;
+        this.targetVolume = targetVolume;
+        this.hopAmount = hopAmount;
+        this.color = color;
+    }
+
+    public Recipe(String name, double maltAmount, double hopAmount, double color) {
+        this.name = name;
+        this.maltAmount = maltAmount;
+        this.hopAmount = hopAmount;
+        this.color = color;
     }
 
     public String getName() {
@@ -49,6 +67,46 @@ public class Recipe {
         this.extract = extract;
     }
 
+    public double getMaltAmount() {
+        return maltAmount;
+    }
+
+    public void setMaltAmount(double maltAmount) {
+        this.maltAmount = maltAmount;
+    }
+
+    public double getTargetVolume() {
+        return targetVolume;
+    }
+
+    public void setTargetVolume(double targetVolume) {
+        this.targetVolume = targetVolume;
+    }
+
+    public double getHopAmount() {
+        return hopAmount;
+    }
+
+    public void setHopAmount(double hopAmount) {
+        this.hopAmount = hopAmount;
+    }
+
+    public double getHopAlfaAcids() {
+        return hopAlfaAcids;
+    }
+
+    public void setHopAlfaAcids(double hopAlfaAcids) {
+        this.hopAlfaAcids = hopAlfaAcids;
+    }
+
+    public double getColor() {
+        return color;
+    }
+
+    public void setColor(double color) {
+        this.color = color;
+    }
+
     public int getIBU() {
         return IBU;
     }
@@ -57,11 +115,11 @@ public class Recipe {
         this.IBU = IBU;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }
