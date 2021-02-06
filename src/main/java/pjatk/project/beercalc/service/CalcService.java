@@ -22,7 +22,7 @@ public class CalcService {
     public Recipe calcExtract(Long recipeId) {
         Optional<Recipe> recipe = recipeRepository.findById(recipeId);
         if (recipe.isPresent()) {
-            recipe.get().setExtract(recipe.get().getTargetVolume()*3/recipe.get().getMaltAmount());
+            recipe.get().setExtract(recipe.get().getTargetVolume() * 3 / recipe.get().getMaltAmount());
             return recipeRepository.save(recipe.get());
         } else {
             return null;
@@ -32,7 +32,7 @@ public class CalcService {
     public Recipe calcIBU(Long recipeId) {
         Optional<Recipe> recipe = recipeRepository.findById(recipeId);
         if (recipe.isPresent()) {
-            recipe.get().setIBU((int) (recipe.get().getHopAmount()*recipe.get().getHopAlfaAcids()));
+            recipe.get().setIBU((int) (recipe.get().getHopAmount() * recipe.get().getHopAlfaAcids()/100));
             return recipeRepository.save(recipe.get());
         } else {
             return null;

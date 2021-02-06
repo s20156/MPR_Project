@@ -1,5 +1,6 @@
 package pjatk.project.beercalc.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pjatk.project.beercalc.model.Recipe;
@@ -53,14 +54,32 @@ public class RecipeController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/calculateExtract/{id}")
-    public ResponseEntity<Recipe> calculateExtract(@PathVariable Long id) {
-        Optional<Recipe> recipe = Optional.of(recipeService.findById(id).get());
-        return ResponseEntity.ok(recipe.get());
-    }
-    @GetMapping("/getGallons/{id}")
+    @PutMapping("/getGallons/{id}")
     public ResponseEntity<Recipe> calculateGallons(@PathVariable Long id) {
         Recipe recipe = calcService.calcMetricToImperial(recipeService.findById(id).get());
         return ResponseEntity.ok(recipe);
+    }
+
+    @PutMapping("/calculateExtract/{id}")
+    public ResponseEntity<Recipe> calculateExtract(@PathVariable Long id) {
+        Optional<Recipe> recipe = recipeService.findById(id);
+        calcService.calcExtract(id);
+        if(recipe.isPresent()) {
+            return ResponseEntity.ok(recipe.get());
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/calculateIBU/{id}")
+    public ResponseEntity<Recipe> calculateIBU(@PathVariable Long id) {
+        Recipe recipe = calcService.calcIBU(id);
+        if (recipe != null) {
+            return ResponseEntity.ok(recipe);
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
