@@ -34,6 +34,18 @@ class CalcServiceTest {
     }
 
     @Test
+    void shouldCalcIBU() {
+        //given
+        Recipe recipe = new Recipe("test", 5, 20, 60, 12, 30);
+        //when
+        recipeRepository.save(recipe);
+        Optional<Recipe> recipeFromDB = recipeRepository.findById(recipe.getId());
+        calcService.calcIBU(recipeFromDB.get().getId());
+        //then
+        assertThat(recipeFromDB.get().getIBU()).isGreaterThan(0);
+    }
+
+    @Test
     void shouldCalcMetricToImperialProperly() {
         //given
         Recipe recipe = new Recipe("test", 5.5, 100.0, 220, 30);
