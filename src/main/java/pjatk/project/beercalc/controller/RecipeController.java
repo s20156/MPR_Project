@@ -3,6 +3,7 @@ package pjatk.project.beercalc.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pjatk.project.beercalc.model.Recipe;
+import pjatk.project.beercalc.service.CalcService;
 import pjatk.project.beercalc.service.RecipeService;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.Optional;
 @RequestMapping("/recipe")
 public class RecipeController {
     private RecipeService recipeService;
+    private CalcService calcService;
 
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
@@ -48,5 +50,11 @@ public class RecipeController {
     public ResponseEntity<Void> deleteAll() {
         recipeService.deleteAll();
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/calculateExtract/{id}")
+    public ResponseEntity<Recipe> calculateExtract(@PathVariable Long id) {
+        Recipe recipe = calcService.calcExtract(id);
+        return ResponseEntity.ok(recipe);
     }
 }
