@@ -8,6 +8,9 @@ import java.util.Optional;
 public class CalcService {
     private RecipeRepository recipeRepository;
 
+    public CalcService() {
+    }
+
     public CalcService(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
     }
@@ -15,7 +18,7 @@ public class CalcService {
     public Recipe calcExtract(Long recipeId) {
         Optional<Recipe> recipe = recipeRepository.findById(recipeId);
         if (recipe.isPresent()) {
-            recipe.get().setExtract(recipe.get().getMaltAmount()*0.7/recipe.get().getTargetVolume());
+            recipe.get().setExtract(recipe.get().getTargetVolume()*3/recipe.get().getMaltAmount());
             return recipeRepository.save(recipe.get());
         } else {
             return null;
@@ -30,5 +33,10 @@ public class CalcService {
         } else {
             return null;
         }
+    }
+
+    public Recipe calcMetricToImperial(Recipe recipe) {
+        recipe.setTargetVolume(recipe.getTargetVolume() * 0.264);
+        return recipe;
     }
 }

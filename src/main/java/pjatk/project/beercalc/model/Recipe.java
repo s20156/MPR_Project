@@ -44,9 +44,10 @@ public class Recipe {
         this.color = color;
     }
 
-    public Recipe(String name, double maltAmount, double hopAmount, double color) {
+    public Recipe(String name, double maltAmount, double targetVolume, double hopAmount, double color) {
         this.name = name;
         this.maltAmount = maltAmount;
+        this.targetVolume = targetVolume;
         this.hopAmount = hopAmount;
         this.color = color;
     }

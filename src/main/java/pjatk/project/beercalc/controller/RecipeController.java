@@ -28,7 +28,7 @@ public class RecipeController {
         return ResponseEntity.ok(recipeService.saveRecipe(recipe));
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity<Optional<Recipe>> findById(@PathVariable Long id) {
         Optional<Recipe> byId = recipeService.findById(id);
         if (byId.isPresent()) {
