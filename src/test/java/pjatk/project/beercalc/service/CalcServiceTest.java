@@ -26,11 +26,9 @@ class CalcServiceTest {
         //given
         Recipe recipe = new Recipe("test", 5, 20, 60, 30);
         //when
-        recipeRepository.save(recipe);
-        Optional<Recipe> recipeFromDB = recipeRepository.findById(recipe.getId());
-        calcService.calcExtract(recipeFromDB.get().getId());
+        calcService.calcExtract(recipe.getId());
         //then
-        assertThat(recipeFromDB.get().getExtract()).isEqualTo(12);
+        assertThat(recipe.getExtract()).isEqualTo(12);
     }
 
     @Test
@@ -38,11 +36,9 @@ class CalcServiceTest {
         //given
         Recipe recipe = new Recipe("test", 5, 20, 60, 12, 30);
         //when
-        recipeRepository.save(recipe);
-        Optional<Recipe> recipeFromDB = recipeRepository.findById(recipe.getId());
-        calcService.calcIBU(recipeFromDB.get().getId());
+        calcService.calcIBU(recipe.getId());
         //then
-        assertThat(recipeFromDB.get().getIBU()).isGreaterThan(0);
+        assertThat(recipe.getIBU()).isGreaterThan(0);
     }
 
     @Test
