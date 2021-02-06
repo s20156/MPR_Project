@@ -31,6 +31,7 @@ class CalcServiceTest {
         when(recipeRepository.findById(recipe.getId())).thenReturn(Optional.of(recipe));
         calcService.calcExtract(recipe.getId());
         //then
+        verify(recipeRepository).save(recipe);
         assertThat(recipe.getExtract()).isEqualTo(12);
     }
 
@@ -42,6 +43,7 @@ class CalcServiceTest {
         when(recipeRepository.findById(recipe.getId())).thenReturn(Optional.of(recipe));
         calcService.calcIBU(recipe.getId());
         //then
+        verify(recipeRepository).save(recipe);
         assertThat(recipe.getIBU()).isGreaterThan(0);
     }
 

@@ -25,4 +25,12 @@ public class RecipeService {
     public Optional<Recipe> findById(Long id) {
         return recipeRepository.findById(id);
     }
+
+    public void deleteRecipe(Long id) {
+        recipeRepository.deleteById(id);
+    }
+
+    public void deleteAll() {
+        recipeRepository.deleteAll();
+    }
 }

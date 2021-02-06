@@ -37,4 +37,16 @@ public class RecipeController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @DeleteMapping("/{id}/remove")
+    public ResponseEntity<Void> deleteRecipe(@PathVariable Long id) {
+        recipeService.deleteRecipe(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/remove")
+    public ResponseEntity<Void> deleteAll() {
+        recipeService.deleteAll();
+        return ResponseEntity.ok().build();
+    }
 }
