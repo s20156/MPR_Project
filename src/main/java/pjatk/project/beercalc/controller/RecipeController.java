@@ -15,8 +15,9 @@ public class RecipeController {
     private RecipeService recipeService;
     private CalcService calcService;
 
-    public RecipeController(RecipeService recipeService) {
+    public RecipeController(RecipeService recipeService, CalcService calcService) {
         this.recipeService = recipeService;
+        this.calcService = calcService;
     }
 
     @GetMapping
@@ -54,7 +55,12 @@ public class RecipeController {
 
     @PutMapping("/calculateExtract/{id}")
     public ResponseEntity<Recipe> calculateExtract(@PathVariable Long id) {
-        Recipe recipe = calcService.calcExtract(id);
+        Optional<Recipe> recipe = Optional.of(recipeService.findById(id).get());
+        return ResponseEntity.ok(recipe.get());
+    }
+    @GetMapping("/getGallons/{id}")
+    public ResponseEntity<Recipe> calculateGallons(@PathVariable Long id) {
+        Recipe recipe = calcService.calcMetricToImperial(recipeService.findById(id).get());
         return ResponseEntity.ok(recipe);
     }
 }

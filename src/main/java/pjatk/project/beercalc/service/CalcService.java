@@ -1,16 +1,20 @@
 package pjatk.project.beercalc.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pjatk.project.beercalc.model.Recipe;
 import pjatk.project.beercalc.repository.RecipeRepository;
 
 import java.util.Optional;
 
+@Service
 public class CalcService {
     private RecipeRepository recipeRepository;
 
     public CalcService() {
     }
 
+    @Autowired
     public CalcService(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
     }
